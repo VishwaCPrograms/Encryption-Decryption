@@ -1,0 +1,41 @@
+Name: Vishwa Venkateshwaran
+
+I certify that I completed all of the work myself with no aid from anyone aside from the instructor or the undergraduate graders.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Part 1:
+
+Q1: I've included 6 bonus test files and 1 required test file for a total of 7 test files. 
+- Required test file (inputFile.in): This is the required test file. This test file ends with ~ as the character which has a lot of 1 bits in it. So, after the encryption process most of the characters will have their most significant bit changed to be 1. This test file tests to see if my encryption process works as expected. It tests to see the failure of my encryption process and covers a challenging-ish case due to how many high level characters it has to print after encryption. 
+- Bonus test file #1 (testFile1.in): This is a routine case test file. It has numbers from 0 to 6 and ends with ~. It tests to see if my encryption process works as expected.
+- Bonus test file #2 (testFile2.in): This is a boundary case test file. It was created using the touch command. It has 0 characters in it. It tests to make sure my program doesn't crash or output anything due to it have 0 characters.  
+- Bonus test file #3 (testFile3.in): This is a boundary case test file. It has exactly 1 character in it. It tests to make sure my program transcribes the character properly. 
+- Bonus test files #4 (testFile4.in), #5 (testFile5.in) and #6 (testFile6.in): These are the challenging case test files. One has a lot of characters, the other has lots of new lines so the encryption has to work correctly to encrypt those lines as well and the the other one has weirdly spaced characters with new lines. These three test files really test my encryption program to see if it properly works with lots of characters, having to transcribe the characters in sets of 8 and transcribe the rest as they are, and encrypting new lines and spaces correctly. 
+
+Q2: 
+- Required test file (inputFile.in) characters: }~|{ #]~ 
+- Expected output file (expectedOutputFile.out) characters: }þüû £Ý 
+- I chose these characters because they have a lot of 1 bits in their binary value. They're a group of diverse characters with varying binary values so I thought they would be good for testing to see if the encryption works properly. 
+
+Q3: The encryption scheme could be modified to shift the bits to the right and add the 8th character's corresponding bit on the far end. Instead of replacing the bit at the 7th index, we would shift all of the bits to the right by 1 and insert the 8th character's corresponding bit (right most bit for the first character, second bit for the 2nd character and so on and so forth) at the 7th position (replacing the 0 that was there after the bit shifting).
+
+Q4: Based on the extra input or the macro, depending on the value of the macro or the input, we could have an if else to switch between the schemes. There is currently a method that does the bit shifting. We could create another function that does the bit shifting as described in Q3. All we would do is have an if-else and based on our input or marco, it would enter one of the clause and we would throw our array of characters into the respesctive function and this would allow us to swap between the schemes.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Part 2: 
+
+Q1: One unexpected situation occurs when you have 7 characters in total in your input file. If the encryption scheme works properly, it'll do nothing and just transcribe the 7 characters as they are to an output file. The decryption scheme will then look at the output file and see that there are 7 characters there and will think it was encrypted. It'll then change those first 7 characters (assuming not all of the characters had 0 as their most significant bit) and create a new 8th character which shouldn't exist. The reason for this happening is because, the decryption scheme relies on the value of 7 for the total amount of characters to decrypt. The encryption relies on 8 to encrypt. If there are less than 8, namely 7, it'll just transcribe those characters. But if there are 8, it'll encrypt and print the 7 encrypted characters. The decryption program has no way of telling whether there were 7 or 8 characters in the original input file. It'll see the 7 characters in the output file and assume it had been encrypted and will run the decryption scheme on those 7 characters. This even occurs with my testFile4.in. It prints an extra character due to their being 7 characters and those 7 characters weren't even encrypted.
+
+Q2: One way to fix this problem would be to check if the 8th character being decrypted is a null character or not. If the program had been encrypted, it would've had the characters go from having 0 as their most significant bit to 1 as their most significant bit. It may be all the characters or some characters or maybe even one character, but something had to have changed. So, if the bits are being changed from 0 to 1, that means the 8th character in out inputfile didn't have all 0s in its binary value, so it for sure was not the null character. If we check the 8th character in the decrypted file and it is a null character, that means no encryption occured, so we don't print out the 8th character to the decryption file output.  
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Part 3: 
+
+Q1: I chose to mangle my encryption code. I did this because I finished my encryption scheme first and then skipped part 2 and went directly to part 3. So at the time I started part 3, I only had my encryption code available to mangle.
+
+Q2: It is definitely not easy for me to understand my mangled code. I even ran into the issue of accidently creating an infinite loop when I first started obfuscating my code. I had to really stare hard at my own code to even figure out where the issue was. If I read this code several months now, there is no way I'm understanding anything immediately. It'll probably take an hour or a couple of hours to even figure out my own code.
+
+Q3: It would be harder to take bad code and turn it into good code. The issue is I would first have to understand what the program is doing. If the code is hard to read at the beginning itself, it would be a pain in the butt to figure out what the code is doing and how to make it clean. 
+
+Q4: The unwritten assumption is that the most significant bit of the characters in the inputfile have to be a 0. 
+
+Q5: If this assumption is not true, then the decryption process could fail. Reason for this is, when we're decrypting, we're assuming the most significant bit value of that character was 0, so we're just replacing that bit value with a 0. If it actually was a 1, the new character isn't going to match with the original character at all. 
+
